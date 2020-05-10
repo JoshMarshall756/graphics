@@ -11,7 +11,7 @@ int main()
     ppm image(image_width, image_height);
 
 
-    int seed = 5;
+    int seed = 69;
     // Create pn object with the reference permutation vector
     PerlinNoise pn(seed);
 
@@ -28,7 +28,7 @@ int main()
 
             // Map values to the [0, 255] interval
             image.r[kk] = floor(255 * n);
-            image.r[kk] = floor(255 * n);
+            image.g[kk] = floor(255 * n);
             image.b[kk] = floor(255 * n);
             kk++;
         }
