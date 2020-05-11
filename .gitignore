@@ -68,3 +68,6 @@ _deps
 
 # Ignore Build Directory
 build/
+
+# Ignore .ppm files
+*.ppm
