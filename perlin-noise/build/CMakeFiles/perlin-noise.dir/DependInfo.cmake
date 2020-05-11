@@ -5,7 +5,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/josh/dev/graphics/perlin-noise/src/Main.cpp" "/home/josh/dev/graphics/perlin-noise/build/CMakeFiles/perlin-noise.dir/src/Main.cpp.o"
-  "/home/josh/dev/graphics/perlin-noise/src/ppm.cpp" "/home/josh/dev/graphics/perlin-noise/build/CMakeFiles/perlin-noise.dir/src/ppm.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

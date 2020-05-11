@@ -19,16 +19,6 @@ vector
 -
 string
 -
-
-/home/josh/dev/graphics/perlin-noise/src/Main.cpp
-cmath
--
-../headers/ppm.h
-/home/josh/dev/graphics/perlin-noise/headers/ppm.h
-../headers/PerlinNoise.h
-/home/josh/dev/graphics/perlin-noise/headers/PerlinNoise.h
-
-/home/josh/dev/graphics/perlin-noise/src/ppm.cpp
 iostream
 -
 fstream
@@ -37,6 +27,12 @@ sstream
 -
 exception
 -
+
+/home/josh/dev/graphics/perlin-noise/src/Main.cpp
+cmath
+-
 ../headers/ppm.h
 /home/josh/dev/graphics/perlin-noise/headers/ppm.h
+../headers/PerlinNoise.h
+/home/josh/dev/graphics/perlin-noise/headers/PerlinNoise.h
 

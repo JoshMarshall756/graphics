@@ -26,6 +26,13 @@ int main()
             // Normal perlin noise
             double n = pn.noise(10 * x, 10 * y, 0.8);
 
+            // Wood like noise
+            // double n = 20 * pn.noise(x, y, 0.8);
+            // n = n - floor(n);
+
+            // Trying something weird
+            // double n = 30 * pn.noise(x, y, 0.8);
+
             // Map values to the [0, 255] interval
             image.r[kk] = floor(255 * n);
             image.g[kk] = floor(255 * n);

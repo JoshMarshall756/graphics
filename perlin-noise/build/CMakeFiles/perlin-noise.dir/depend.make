@@ -5,6 +5,3 @@ CMakeFiles/perlin-noise.dir/src/Main.cpp.o: ../headers/PerlinNoise.h
 CMakeFiles/perlin-noise.dir/src/Main.cpp.o: ../headers/ppm.h
 CMakeFiles/perlin-noise.dir/src/Main.cpp.o: ../src/Main.cpp
 
-CMakeFiles/perlin-noise.dir/src/ppm.cpp.o: ../headers/ppm.h
-CMakeFiles/perlin-noise.dir/src/ppm.cpp.o: ../src/ppm.cpp
-

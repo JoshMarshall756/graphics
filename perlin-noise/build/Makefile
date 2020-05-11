@@ -150,33 +150,6 @@ src/Main.cpp.s:
 	$(MAKE) -f CMakeFiles/perlin-noise.dir/build.make CMakeFiles/perlin-noise.dir/src/Main.cpp.s
 .PHONY : src/Main.cpp.s
 
-src/ppm.o: src/ppm.cpp.o
-
-.PHONY : src/ppm.o
-
-# target to build an object file
-src/ppm.cpp.o:
-	$(MAKE) -f CMakeFiles/perlin-noise.dir/build.make CMakeFiles/perlin-noise.dir/src/ppm.cpp.o
-.PHONY : src/ppm.cpp.o
-
-src/ppm.i: src/ppm.cpp.i
-
-.PHONY : src/ppm.i
-
-# target to preprocess a source file
-src/ppm.cpp.i:
-	$(MAKE) -f CMakeFiles/perlin-noise.dir/build.make CMakeFiles/perlin-noise.dir/src/ppm.cpp.i
-.PHONY : src/ppm.cpp.i
-
-src/ppm.s: src/ppm.cpp.s
-
-.PHONY : src/ppm.s
-
-# target to generate assembly for a file
-src/ppm.cpp.s:
-	$(MAKE) -f CMakeFiles/perlin-noise.dir/build.make CMakeFiles/perlin-noise.dir/src/ppm.cpp.s
-.PHONY : src/ppm.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -189,9 +162,6 @@ help:
 	@echo "... src/Main.o"
 	@echo "... src/Main.i"
 	@echo "... src/Main.s"
-	@echo "... src/ppm.o"
-	@echo "... src/ppm.i"
-	@echo "... src/ppm.s"
 .PHONY : help
 
 
