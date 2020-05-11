@@ -65,3 +65,6 @@ _deps
 .history
 
 # End of https://www.gitignore.io/api/c++,cmake
+
+# Ignore Build Directory
+build/
