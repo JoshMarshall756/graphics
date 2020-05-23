@@ -1,7 +1,7 @@
 #pragma once
 
-#include "headers/hittable.h"
-#include "headers/vec3.h"
+#include "../headers/hittable.h"
+#include "../headers/vec3.h"
 
 class sphere: public hittable 
 {
@@ -24,7 +24,7 @@ bool sphere::hit(const ray& r, double t_min, double t_max, hit_record& rec) cons
     // removing the old factor of 2, was: 2.0*dot(oc, r.direction()
     auto half_b = dot(oc, r.direction());
     auto c = oc.length_squared() - radius*radius;
-    auto discriminant = half_b*half_b - 4*a*c;
+    auto discriminant = half_b*half_b - a*c;
 
     if (discriminant > 0)
     {
