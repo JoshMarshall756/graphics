@@ -11,9 +11,9 @@ class ray
     point3 origin() const { return orig; }
     vec3 direction() const { return dir; }
 
+    // The ray function: P(t) = A + tb
     point3 at(double t) const 
     {
-        // P(t) = A + tb
         return orig + t*dir;
     }
 
