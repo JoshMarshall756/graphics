@@ -4,10 +4,22 @@
 #include "../headers/color.h"
 #include "../headers/ray.h"
 
+bool hit_sphere(const point3& center, double radius, const ray& r)
+{
+    vec3 oc = r.origin() - center;
+    auto a = dot(r.direction(), r.direction());
+    auto b = 2.0 * dot(oc, r.direction());
+    auto c = dot(oc, oc) - radius*radius;
+    auto discriminant = b*b - 4*a*c;
+    return (discriminant > 0);
+}
 
 // Linearly blends white and blue depending on height of y
 color ray_color(const ray& r) 
 {
+    // color red any pixel that hits a small sphere
+    if (hit_sphere(point3(0, 0, -1), 0.5, r))
+        return color(1, 0, 0);
     // scale vector down to unit length -1.0 < y < 1.0
     vec3 unit_direction = unit_vector(r.direction());
     // looking at the y component of the unit vector, and scale to 0.0 <= t <= 1.0
