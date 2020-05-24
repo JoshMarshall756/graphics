@@ -1,12 +1,14 @@
 #pragma once
 
-#include "../headers/ray.h"
+#include "ray.h"
+class material;
 
-// A record of useful information computed
+// A record of useful information computed and avoid lots of arguments
 struct hit_record
 {
     point3 p;
     vec3 normal;
+    shared_ptr<material> mat_ptr;
     double t;
     bool front_face;
 

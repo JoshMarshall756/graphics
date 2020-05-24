@@ -5,6 +5,7 @@
 #include "../headers/sphere.h"
 #include "../headers/color.h"
 #include "../headers/camera.h"
+#include "../headers/material.h"
 
 // Linearly blends white and blue depending on height of y
 color ray_color(const ray& r, const hittable& world, int depth) 
@@ -18,8 +19,11 @@ color ray_color(const ray& r, const hittable& world, int depth)
     // Fixing 'shadow acne' by calculating reflected ray origins with tolerance
     if(world.hit(r, 0.001, infinity, rec))
     {
-        point3 target = rec.p + random_in_hemispehere(rec.normal);
-        return 0.5 * ray_color(ray(rec.p, target - rec.p), world, depth-1);
+        ray scattered;
+        color attenuation;
+        if (rec.mat_ptr->scatter(r, rec, attenuation, scattered))
+            return attenuation * ray_color(scattered, world, depth-1);
+        return color(0,0,0);
     }
     // scale vector down to unit length -1.0 < y < 1.0
     vec3 unit_direction = unit_vector(r.direction());
@@ -39,17 +43,23 @@ int main()
 
     // Initial line for PPM file
     std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
-    
-    camera cam;
 
     hittable_list world;
-    world.add(make_shared<sphere>(point3(0,0,-1), 0.5));
-    world.add(make_shared<sphere>(point3(0,-100.5,-1), 100));
+    world.add(make_shared<sphere>(
+        point3(0,0,-1), 0.5, make_shared<lambertian>(color(0.7, 0.3, 0.3))));
 
+    world.add(make_shared<sphere>(
+        point3(0,-100.5,-1), 100, make_shared<lambertian>(color(0.8, 0.8, 0.0))));
+
+    world.add(make_shared<sphere>(point3(1,0,-1), 0.5, make_shared<metal>(color(.8,.6,.2), 1.0)));
+    world.add(make_shared<sphere>(point3(-1,0,-1), 0.5, make_shared<metal>(color(.8,.8,.8), 0.3)));
+
+    camera cam;
+    
     for (int j = image_height-1; j >= 0; --j)
     {
         std::cerr << "\rScanlines remaining: " << j << ' ' << std::flush;
-        for (int i = image_width-1; i >= 0; --i)
+        for (int i = 0; i < image_width; ++i)
         {
             // Rendering with multi-sampled pixels
             color pixel_color(0,0,0);
