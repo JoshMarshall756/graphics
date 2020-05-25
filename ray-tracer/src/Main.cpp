@@ -53,10 +53,10 @@ int main()
         point3(0,-100.5,-1), 100, make_shared<lambertian>(color(0.8, 0.8, 0.0))));
 
     world.add(make_shared<sphere>(point3(1,0,-1), 0.5, make_shared<metal>(color(.8,.6,.2), 0.3)));
-    //world.add(make_shared<sphere>(point3(-1,0,-1), 0.5, make_shared<dielectric>(1.5)));
+    world.add(make_shared<sphere>(point3(-1,0,-1), 0.5, make_shared<dielectric>(1.5)));
     world.add(make_shared<sphere>(point3(-1,0,-1), -0.45 , make_shared<dielectric>(1.5)));
 
-    camera cam;
+    camera cam(point3(-2, 2, 1), point3(0, 0, -1), vec3(0, 1, 0), 20, aspect_ratio);
     
     for (int j = image_height-1; j >= 0; --j)
     {
