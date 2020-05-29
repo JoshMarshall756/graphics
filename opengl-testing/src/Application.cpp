@@ -1,4 +1,7 @@
+#define GLEW_STATIC
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
+#include <iostream>
 
 int main(void)
 {
@@ -16,9 +19,17 @@ int main(void)
         return -1;
     }
 
+
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
+    if (glewInit() != GLEW_OK)
+        std::cout << "GLEW ERROR!!" << std::endl;
+    else
+        std::cout << "GLEW OK!!" << std::endl;
+
+    std::cout << glGetString(GL_VERSION) << std::endl;
+    
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
     {
@@ -27,8 +38,9 @@ int main(void)
 
         glBegin(GL_TRIANGLES);
         glVertex2f(-0.5f, -0.5f);
-        glVertex2f(0.0f, 0.5f);
+        glVertex2f(0.0f, 0.9f);
         glVertex2f(0.5f, -0.5f);
+        glColor3f(0.996f, 0.603f, 0.854f);
         glEnd();
 
         /* Swap front and back buffers */
