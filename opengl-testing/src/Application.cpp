@@ -17,7 +17,7 @@ static unsigned int compileShader(const unsigned int type, const std::string &so
         int length;
         glGetShaderiv(id, GL_INFO_LOG_LENGTH, &length);
         char *message = (char *)alloca(length * sizeof(char));
-        std::cout << "Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader" << std::endl;
+        std::cout << "ERROR: Failed to compile " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader" << std::endl;
         std::cout << message << std::endl;
 
         glDeleteShader(id);
@@ -25,7 +25,7 @@ static unsigned int compileShader(const unsigned int type, const std::string &so
     }
     else
     {
-        std::cout << "Compiled " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader." << std::endl;
+        std::cout << "LOG: Compiled " << (type == GL_VERTEX_SHADER ? "vertex" : "fragment") << " shader." << std::endl;
     }
 
     return id;
@@ -83,13 +83,13 @@ int main(void)
 
     // Must be called after creating a valid OpenGL Rendering Context4
     if (glewInit() != GLEW_OK)
-        std::cout << "GLEW ERROR!!" << std::endl;
+        std::cout << "ERROR: GLEW ERROR!!" << std::endl;
     else
         // Initiliazation succeeded and
-        std::cout << "GLEW OK!!" << std::endl;
+        std::cout << "LOG: GLEW OK!!" << std::endl;
 
     // Print opengl version
-    std::cout << glGetString(GL_VERSION) << std::endl;
+    std::cout << "LOG: OPENGL VERSION " << glGetString(GL_VERSION) << std::endl;
 
     // Positions of a triangle in 2D space
     float vertexPositions[6] = {
@@ -104,9 +104,11 @@ int main(void)
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6, vertexPositions, GL_STATIC_DRAW);
 
+    // Using an VBA
     unsigned int vbo;
     glGenVertexArrays(1, &vbo);
     glBindVertexArray(vbo);
+
     // Define the structure of the data
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
