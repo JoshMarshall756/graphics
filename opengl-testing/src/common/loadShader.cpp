@@ -9,7 +9,7 @@
 #include <sstream>
 #include <vector>
 
-unsigned int createShader(const char* vertexShaderFile, const char* fragmentShaderFile)
+unsigned int createShaderProgram(const char* vertexShaderFile, const char* fragmentShaderFile)
 {
     // Create shaders
     unsigned int vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -27,11 +27,12 @@ unsigned int createShader(const char* vertexShaderFile, const char* fragmentShad
     }
     else
     {
-        printf("Impossible to open %s", vertexShaderFile);
+        printf("ERROR: Impossible to open %s", vertexShaderFile);
         getchar();
         return 0;
     }
     
+    // Open and read from fragment file
     std::string fragmentShaderCode;
     std::ifstream fragmentShaderStream(fragmentShaderFile, std::ios::in);
     if(fragmentShaderStream.is_open())
@@ -43,7 +44,7 @@ unsigned int createShader(const char* vertexShaderFile, const char* fragmentShad
     }
     else
     {
-        printf("Impossible to open %s", fragmentShaderFile);
+        printf("ERROR: Impossible to open %s", fragmentShaderFile);
         getchar();
         return 0;
     }
@@ -52,7 +53,7 @@ unsigned int createShader(const char* vertexShaderFile, const char* fragmentShad
     int infoLogLength;
 
     // Compile Vertex Shader
-    printf("Compiling shader: %s\n", vertexShaderFile);
+    printf("LOG: Compiling shader: %s\n", vertexShaderFile);
     char const* vertexSourcePtr = vertexShaderCode.c_str();
     glShaderSource(vertexShaderID, 1, &vertexSourcePtr, NULL);
     glCompileShader(vertexShaderID);
@@ -70,7 +71,7 @@ unsigned int createShader(const char* vertexShaderFile, const char* fragmentShad
     infoLogLength = 0;
 
     // Compile Fragment Shader
-    printf("Compiling shader: %s\n", fragmentShaderFile);
+    printf("LOG: Compiling shader: %s\n", fragmentShaderFile);
     char const* fragmentSourcePtr = fragmentShaderCode.c_str();
     glShaderSource(fragmentShaderID, 1, &fragmentSourcePtr, NULL);
     glCompileShader(fragmentShaderID);
@@ -88,7 +89,7 @@ unsigned int createShader(const char* vertexShaderFile, const char* fragmentShad
     infoLogLength = 0;
 
     // Link program
-    printf("Linking program\n");
+    printf("LOG: Linking program\n");
     unsigned int programID = glCreateProgram();
     glAttachShader(programID, vertexShaderID);
     glAttachShader(programID, fragmentShaderID);
