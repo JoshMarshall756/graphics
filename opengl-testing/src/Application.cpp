@@ -2,8 +2,15 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+// GLM maths library
+#include <glm/glm.hpp>
+#include<glm/gtc/matrix_transform.hpp>
+
 #include <iostream>
 #include "common/loadShader.cpp"
+
+const int WINDOW_WIDTH = 640;
+const int WINDOW_HEIGHT = 480;
 
 int main(void)
 {
@@ -19,7 +26,7 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); 
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Application", NULL, NULL);
+    window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Application", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -40,17 +47,17 @@ int main(void)
     std::cout << "LOG: OPENGL VERSION " << glGetString(GL_VERSION) << std::endl;
 
     // Positions of a triangle in 2D space
-    float vertexPositions[6] = {
-        // X,    Y
-        -0.5f, -0.5f,
-        0.0f, 0.5f,
-        0.5f, -0.5f};
+    float vertexPositions[9] = {
+        // X,    Y,    Z
+        -0.5f, -0.5f, 0.0f,
+         0.0f,  0.5f, 0.0f,
+         0.5f, -0.5f, 0.0f};
 
     // Creating a vertex buffer of positions for the triangle
     unsigned int buffer;
     glGenBuffers(1, &buffer);
     glBindBuffer(GL_ARRAY_BUFFER, buffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 6, vertexPositions, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 9, vertexPositions, GL_STATIC_DRAW);
 
     // Using an VBA
     unsigned int vbo;
@@ -59,10 +66,31 @@ int main(void)
 
     // Define the structure of the data
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, 0);
+    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 3, 0);
 
     unsigned int shaderProgram = createShaderProgram("shaders/vertexShader.glsl", "shaders/fragmentShader.glsl");
     glUseProgram(shaderProgram);
+
+    // Model View Projection Matrix 
+    // Projection matrix (perspective view)
+    glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
+    // Projection matrix (orthographic view)
+    //glm::mat4 projection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,0.0f,100.0f);
+
+    // View/Camera matrix
+    glm::mat4 view = glm::lookAt(glm::vec3(4,3,3), glm::vec3(0,0,0), glm::vec3(0,1,0));
+
+    // Model matrix: an identity matrix (model at the origin)
+    glm::mat4 model = glm::mat4(1.0f);
+
+    // The ModelViewProjection matrix
+    glm::mat4 mvp = projection * view * model;
+
+    // Get a handle for the "MVP" uniform
+    unsigned int matrixID = glGetUniformLocation(shaderProgram, "MVP");
+
+    // Send our matrix to the currently bound shader, in the "MVP" uniform
+    glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
