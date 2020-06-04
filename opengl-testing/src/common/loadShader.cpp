@@ -1,5 +1,4 @@
 // Load and compile shaders from a file
-
 #pragma once
 
 #include <GL/glew.h>
@@ -12,9 +11,11 @@
 /** Compiles the shader source code and returns ID of that shader
  * @param shaderType the type of shader
  * @param shaderCode the source code of the shader as a string literal
+ * @return ID returns the ID of the compiled shader
  */
 unsigned int compileShader(unsigned int shaderType, std::string &shaderCode)
 {
+    printf("LOG: Compiling shader: %s\n", shaderType == GL_VERTEX_SHADER ? "vertex shader" : "fragment shader");
     int result = GL_FALSE;
     int infoLogLength;
     unsigned int shaderID = glCreateShader(shaderType);
@@ -40,10 +41,11 @@ unsigned int compileShader(unsigned int shaderType, std::string &shaderCode)
 /** Reads the file name given into a std::string
  * 
  * @param shaderFile filepath of the shader file
- * 
+ * @return returns the source code of the shaderFile as a string
  */
 std::string readShaderFile(const char* shaderFile)
 {
+    printf("LOG: Reading shader: %s\n", shaderFile);
     std::string shaderCode;
     std::ifstream shaderStream(shaderFile, std::ios::in);
     if (shaderStream.is_open())
@@ -56,7 +58,7 @@ std::string readShaderFile(const char* shaderFile)
     else
     {
         {
-            printf("ERROR: Impossible to open %s", shaderFile);
+            printf("ERROR: Impossible to open %s\n", shaderFile);
             getchar();
             return "";
         }

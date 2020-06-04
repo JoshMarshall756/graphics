@@ -44,7 +44,7 @@ int main(void)
         std::cout << "LOG: GLEW OK!!" << std::endl;
 
     // Print opengl version
-    std::cout << "LOG: OPENGL VERSION " << glGetString(GL_VERSION) << std::endl;
+    std::cout << "INFO: OPENGL VERSION " << glGetString(GL_VERSION) << std::endl;
 
     // Positions of a triangle in 2D space
     float vertexPositions[9] = {
