@@ -4,7 +4,9 @@
 
 // GLM maths library
 #include <glm/glm.hpp>
-#include<glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/transform.hpp>
 
 #include <iostream>
 #include "common/loadShader.cpp"
@@ -82,6 +84,18 @@ int main(void)
 
     // Model matrix: an identity matrix (model at the origin)
     glm::mat4 model = glm::mat4(1.0f);
+
+    // Building a transformation matrix
+    glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0), glm::vec3(1,1,0));
+    glm::mat4 scaleMatrix = glm::scale(glm::mat4(1.0), glm::vec3(1.5, 1.5, 1.5));
+    glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0), glm::radians(180.0f), glm::vec3(0.0f, 0.0f, 1.0f));
+
+    // translate THEN scale THEN  rotate
+    glm::mat4 transformationMatrix = rotationMatrix * scaleMatrix * translationMatrix;
+    for (int i = 0; i < 4; i++)
+    {
+        model[i] = transformationMatrix * model[i];
+    }
 
     // The ModelViewProjection matrix
     glm::mat4 mvp = projection * view * model;
