@@ -80,7 +80,7 @@ int main(void)
     //glm::mat4 projection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,0.0f,100.0f);
 
     // View/Camera matrix
-    glm::mat4 view = glm::lookAt(glm::vec3(4,3,3), glm::vec3(0,0,0), glm::vec3(0,1,0));
+    glm::mat4 view = glm::lookAt(glm::vec3(0,0, 5), glm::vec3(0,0,0), glm::vec3(0,1,0));
 
     // Model matrix: an identity matrix (model at the origin)
     glm::mat4 model = glm::mat4(1.0f);
@@ -106,11 +106,14 @@ int main(void)
     // Send our matrix to the currently bound shader, in the "MVP" uniform
     glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
 
+    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
+    while (!glfwWindowShouldClose(window) || glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
     {
         /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glDrawArrays(GL_TRIANGLES, 0, 3);
 
