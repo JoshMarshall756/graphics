@@ -99,6 +99,14 @@ int main(void)
         randomColorData[3*v+2] = generateRandomColor();
     }
 
+    float positionColorData[12*3*3];
+    for (int v = 0; v < 12*3; v++)
+    {
+        positionColorData[3*v+0] = vertexPositions[3*v+0];
+        positionColorData[3*v+1] = vertexPositions[3*v+1];
+        positionColorData[3*v+2] = vertexPositions[3*v+2];
+    }
+
     // Using an VBA
     unsigned int vbo;
     glGenVertexArrays(1, &vbo);
@@ -118,7 +126,7 @@ int main(void)
     unsigned int colorBuffer;
     glGenBuffers(1, &colorBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, colorBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(randomColorData), randomColorData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(positionColorData), positionColorData, GL_STATIC_DRAW);
 
     // Defining the structure of the color data
     glEnableVertexAttribArray(1);
@@ -134,16 +142,16 @@ int main(void)
     //glm::mat4 projection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,0.0f,100.0f);
 
     // View/Camera matrix
-    glm::mat4 view = glm::lookAt(glm::vec3(4,3,3), glm::vec3(0,0,0), glm::vec3(0,1,0));
+    glm::mat4 view = glm::lookAt(glm::vec3(4,3,8), glm::vec3(0,0,0), glm::vec3(0,1,0));
 
     // Model matrix: an identity matrix (model at the origin)
     glm::mat4 model = glm::mat4(1.0f);
 
     // Get the transformation matrix
-    glm::mat4 transformationMatrix = buildTransformationMatrix();
+    //glm::mat4 transformationMatrix = buildTransformationMatrix();
 
     // Apply transformation matrix to every column in model matrix
-    for (int i = 0; i < model.length(); i++) model[i] = transformationMatrix * model[i];
+    //for (int i = 0; i < model.length(); i++) model[i] = transformationMatrix * model[i];
 
     // The ModelViewProjection matrix
     glm::mat4 mvp = projection * view * model;
