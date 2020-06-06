@@ -11,7 +11,7 @@
 #include <iostream>
 #include "common/loadShader.cpp"
 #include "common/BuildTransformMatrix.cpp"
-#include "common/RandomColorArray.cpp"
+#include "common/GenerateRandomColor.cpp"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
