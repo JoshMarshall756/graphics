@@ -140,10 +140,10 @@ int main(void)
     glm::mat4 model = glm::mat4(1.0f);
 
     // Get the transformation matrix
-    //glm::mat4 transformationMatrix = buildTransformationMatrix();
+    glm::mat4 transformationMatrix = buildTransformationMatrix();
 
     // Apply transformation matrix to every column in model matrix
-    //for (int i = 0; i < model.length(); i++) model[i] = transformationMatrix * model[i];
+    for (int i = 0; i < model.length(); i++) model[i] = transformationMatrix * model[i];
 
     // The ModelViewProjection matrix
     glm::mat4 mvp = projection * view * model;
@@ -155,6 +155,9 @@ int main(void)
     glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
 
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window) || glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
