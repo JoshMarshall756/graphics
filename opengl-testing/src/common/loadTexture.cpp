@@ -1,6 +1,6 @@
 #include <GL/glew.h>
 
-#include <iostream>
+#include "common.hpp"
 
 unsigned int loadBMP(const char* texturePath)
 {

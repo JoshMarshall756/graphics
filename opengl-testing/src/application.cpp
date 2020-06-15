@@ -8,7 +8,6 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/transform.hpp>
 
-#include <iostream>
 #include "common.hpp"
 
 const int WINDOW_WIDTH = 640;

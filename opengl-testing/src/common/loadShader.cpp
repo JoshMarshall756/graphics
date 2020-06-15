@@ -1,9 +1,6 @@
 #include <GL/glew.h>
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
+#include "common.hpp"
 
 /** Compiles the shader source code and returns ID of that shader
  * @param shaderType the type of shader
