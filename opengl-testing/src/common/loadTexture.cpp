@@ -1,12 +1,10 @@
-#pragma once
-
-#include<GL/glew.h>
+#include <GL/glew.h>
 
 #include <iostream>
 
 unsigned int loadBMP(const char* texturePath)
 {
-    printf("LOG: Reading image: %s", texturePath);
+    printf("LOG: Reading image: %s\n", texturePath);
 
     // Data read from the BMP file
     unsigned char header[54];       // Each BMP file begins with a 54-bytes header

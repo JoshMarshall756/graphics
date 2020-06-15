@@ -9,10 +9,7 @@
 #include <glm/gtx/transform.hpp>
 
 #include <iostream>
-#include "common/loadShader.cpp"
-#include "common/BuildTransformMatrix.cpp"
-#include "common/GenerateRandomColor.cpp"
-#include "common/loadTexture.cpp"
+#include "common.hpp"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
@@ -38,6 +35,8 @@ int main(void)
         glfwTerminate();
         return -1;
     }
+
+    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
@@ -194,7 +193,6 @@ int main(void)
     // Get a handle for the "MVP" uniform
     unsigned int matrixID = glGetUniformLocation(shaderProgram, "MVP");
 
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);

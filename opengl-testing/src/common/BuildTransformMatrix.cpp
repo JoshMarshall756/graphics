@@ -1,7 +1,3 @@
-// File just to hold a function to build a transformation matrix
-// Just to clean up the main file for now
-#pragma once
-
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 

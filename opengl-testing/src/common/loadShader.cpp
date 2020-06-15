@@ -1,6 +1,3 @@
-// Load and compile shaders from a file
-#pragma once
-
 #include <GL/glew.h>
 
 #include <iostream>

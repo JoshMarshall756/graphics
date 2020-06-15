@@ -1,7 +1,3 @@
-// Contains a simple function that returns a randomly generated float that is [0.0,1.0]
-
-#pragma once
-
 #include <random>
 
 /** Generates a random float between [0.0,1.0] 
