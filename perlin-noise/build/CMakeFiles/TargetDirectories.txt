@@ -1,3 +1,0 @@
-/home/josh/dev/graphics/perlin-noise/build/CMakeFiles/rebuild_cache.dir
-/home/josh/dev/graphics/perlin-noise/build/CMakeFiles/perlin-noise.dir
-/home/josh/dev/graphics/perlin-noise/build/CMakeFiles/edit_cache.dir

@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/perlin-noise.dir/src/Main.cpp.o  -o perlin-noise 
