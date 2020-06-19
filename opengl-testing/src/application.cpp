@@ -192,9 +192,22 @@ int main(void)
     // Get a handle for the "MVP" uniform
     unsigned int matrixID = glGetUniformLocation(shaderProgram, "MVP");
 
+    // For speed computation
+    double lastTime = glfwGetTime();
+    int nbFrames = 0;
+
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window) || glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
     {
+        // Measure speed
+        double currentTime = glfwGetTime();
+        nbFrames++;
+        if (currentTime - lastTime >= 1.0)
+        {
+            printf("%f ms/frame\n", 1000.0/double(nbFrames));
+            nbFrames = 0;
+            lastTime += 1.0;
+        }
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
