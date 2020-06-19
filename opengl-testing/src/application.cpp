@@ -9,6 +9,7 @@
 #include <glm/gtx/transform.hpp>
 
 #include "common.hpp"
+#include "controls.hpp"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
@@ -19,7 +20,10 @@ int main(void)
 
     /* Initialize the library */
     if (!glfwInit())
+    {
+        std::cout << "ERROR: Failed to init GLFW!!" << std::endl;
         return -1;
+    }
 
     glfwWindowHint(GLFW_SAMPLES, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -35,8 +39,6 @@ int main(void)
         return -1;
     }
 
-    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
-
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
@@ -49,6 +51,22 @@ int main(void)
 
     // Print opengl version
     std::cout << "INFO: OPENGL VERSION " << glGetString(GL_VERSION) << std::endl;
+
+    // Ensure we can capture the escape key being pressed
+    glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
+    // Hide the mouse and enable unlimited movement
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
+    // Set the mouse at center of screen
+    glfwPollEvents();
+    glfwSetCursorPos(window, WINDOW_WIDTH/2, WINDOW_HEIGHT/2);
+
+    // Enable depth test
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+
+    // Background colour
+    glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
     // Positions of a triangle in 2D space
     float vertexPositions[108] = {
@@ -168,36 +186,8 @@ int main(void)
     // Get a handle for our "myTextureSampler" uniform
     unsigned int textureID = glGetUniformLocation(shaderProgram, "myTextureSampler");
 
-    // Model View Projection Matrix 
-    // Projection matrix (perspective view)
-    glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)WINDOW_WIDTH / (float)WINDOW_HEIGHT, 0.1f, 100.0f);
-    // Projection matrix (orthographic view)
-    //glm::mat4 projection = glm::ortho(-10.0f,10.0f,-10.0f,10.0f,0.0f,100.0f);
-
-    // View/Camera matrix
-    glm::mat4 view = glm::lookAt(glm::vec3(4,3,3), glm::vec3(0,0,0), glm::vec3(0,1,0));
-
-    // Model matrix: an identity matrix (model at the origin)
-    glm::mat4 model = glm::mat4(1.0f);
-
-    // Get the transformation matrix
-    //glm::mat4 transformationMatrix = buildTransformationMatrix();
-
-    // Apply transformation matrix to every column in model matrix
-    //for (int i = 0; i < model.length(); i++) model[i] = transformationMatrix * model[i];
-
-    // The ModelViewProjection matrix
-    glm::mat4 mvp = projection * view * model;
-
     // Get a handle for the "MVP" uniform
     unsigned int matrixID = glGetUniformLocation(shaderProgram, "MVP");
-
-
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-
-    // Background colour
-    glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window) || glfwGetKey(window, GLFW_KEY_ESCAPE) != GLFW_PRESS)
@@ -207,6 +197,13 @@ int main(void)
 
         // Use my shader
         glUseProgram(shaderProgram);
+
+        // Compute MVP matrix from keyboard and mouse input
+        computeMatricesFromInputs(window);
+        glm::mat4 projectionMatrix = getProjectionMatrix();
+        glm::mat4 viewMatrix = getViewMatrix();
+        glm::mat4 modelMatrix = glm::mat4(1.0f);
+        glm::mat4 mvp = projectionMatrix * viewMatrix * modelMatrix;
 
         // Send our matrix to the currently bound shader, in the "MVP" uniform
         glUniformMatrix4fv(matrixID, 1, GL_FALSE, &mvp[0][0]);
