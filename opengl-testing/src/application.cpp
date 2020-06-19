@@ -65,6 +65,9 @@ int main(void)
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
 
+    // Cull triangles which normal is not towards the camera
+    glEnable(GL_CULL_FACE);
+
     // Background colour
     glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
