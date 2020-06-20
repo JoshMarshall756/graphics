@@ -16,3 +16,5 @@ add_executable (opengl-testing "${source_files}")
 target_include_directories(opengl-testing PRIVATE headers)
 
 target_link_libraries(opengl-testing glfw OpenGL::GL ${GLEW_LIBRARY} glm)
+
+target_compile_options(opengl-testing PRIVATE -Werror -Wall -Wextra)
