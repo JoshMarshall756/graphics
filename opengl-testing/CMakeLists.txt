@@ -1,6 +1,6 @@
 cmake_minimum_required (VERSION 3.5)
 
-project (opengl-testing)
+project (openglTesting)
 
 find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
@@ -11,10 +11,10 @@ set (source_dir "${PROJECT_SOURCE_DIR}/src/")
 
 file (GLOB source_files "${source_dir}/*.cpp" "${source_dir}/common/*.cpp")
 
-add_executable (opengl-testing "${source_files}")
+add_executable (openglTesting "${source_files}")
 
-target_include_directories(opengl-testing PRIVATE headers)
+target_include_directories(openglTesting PRIVATE headers)
 
-target_link_libraries(opengl-testing glfw OpenGL::GL ${GLEW_LIBRARY} glm)
+target_link_libraries(openglTesting glfw OpenGL::GL ${GLEW_LIBRARY} glm)
 
-target_compile_options(opengl-testing PRIVATE -Werror -Wall -Wextra)
+target_compile_options(openglTesting PRIVATE -Werror -Wall -Wextra)
