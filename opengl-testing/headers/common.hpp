@@ -25,4 +25,21 @@ unsigned int createShaderProgram(const char* vertexShaderFile, const char* fragm
 // loadTexture.cpp
 unsigned int loadBMP(const char* texturePath);
 
+// loadOBJ.cpp
+/**
+ *  Load a 3D mesh from a file
+ * 
+ * @param path relative path to file
+ * @param outVertices an std::vector<glm::vec3> for the read vertices to be loaded into
+ * @param outUvs an std::vector<glm::vec2> for the read UV mappings to be loaded into
+ * @param outNormals and std::vector<glm::vec3> fot the read normals to be loaded into
+ * @return returns false if something went wrong 
+ */
+bool loadObj(
+    const char* path, 
+    std::vector<glm::vec3> &outVertices,
+    std::vector<glm::vec2> &outUvs,
+    std::vector<glm::vec3> &outNormals
+    );
+
 #endif
