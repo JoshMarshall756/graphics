@@ -1,0 +1,3 @@
+// the configure options and settings for openglTesting target 
+#define openglTesting_VERSION_MAJOR @openglTesting_VERSION_MAJOR@
+#define openglTesting_VERSION_MINOR @openglTesting_VERSION_MINOR@

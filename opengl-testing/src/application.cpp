@@ -10,6 +10,7 @@
 
 #include "common.hpp"
 #include "controls.hpp"
+#include "openglTestingConfig.h"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
@@ -51,6 +52,9 @@ int main(void)
 
     // Print opengl version
     std::cout << "INFO: OPENGL VERSION " << glGetString(GL_VERSION) << std::endl;
+
+    // Print target version
+    std::cout << "LOG: Version " << openglTesting_VERSION_MAJOR << "." << openglTesting_VERSION_MINOR << std::endl;
 
     // Ensure we can capture the escape key being pressed
     glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
