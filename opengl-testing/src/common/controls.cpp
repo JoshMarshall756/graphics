@@ -24,7 +24,7 @@ float initialFoV = 45.0f;
 
 // 3 units / second
 float speed = 3.0f;
-float mouseSpeed = 0.005f;
+float mouseSpeed = 0.05f;
 
 float aspectRatio = 4.0f / 3.0f; 
 
