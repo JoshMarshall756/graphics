@@ -154,7 +154,7 @@ int main(void)
 		0.667979f, 1.0f-0.335851f
 	};
 
-    float randomColorData[12*3*3];
+    /* float randomColorData[12*3*3];
     for (int v = 0; v < 12*3; v++)
     {
         randomColorData[3*v+0] = generateRandomColor();
@@ -168,7 +168,7 @@ int main(void)
         positionColorData[3*v+0] = vertexPositions[3*v+0];
         positionColorData[3*v+1] = vertexPositions[3*v+1];
         positionColorData[3*v+2] = vertexPositions[3*v+2];
-    }
+    } */
 
     // Using an VBA
     unsigned int vbo;
@@ -191,10 +191,10 @@ int main(void)
 
     unsigned int texture = loadBMP("res/uvtemplate.bmp");
     // Get a handle for our "myTextureSampler" uniform
-    unsigned int textureID = glGetUniformLocation(shaderProgram, "myTextureSampler");
+    int textureID = glGetUniformLocation(shaderProgram, "myTextureSampler");
 
     // Get a handle for the "MVP" uniform
-    unsigned int matrixID = glGetUniformLocation(shaderProgram, "MVP");
+    int matrixID = glGetUniformLocation(shaderProgram, "MVP");
 
     // For speed computation
     double lastTime = glfwGetTime();
