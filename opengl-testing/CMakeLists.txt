@@ -22,15 +22,14 @@ set_compiler_warnings(project_warnings)
 # This library is the main library
 set(source_dir "${PROJECT_SOURCE_DIR}/src/")
 
-add_library(common_src
-            src/common/buildTransformMatrix.cpp
-            src/common/controls.cpp
-            src/common/generateRandomColor.cpp
-            src/common/loadObj.cpp
-            src/common/loadShader.cpp
-            src/common/loadTexture.cpp)
-target_include_directories(common_src PRIVATE headers)
+add_executable(openglTesting 
+                src/application.cpp
+                src/common/buildTransformMatrix.cpp
+                src/common/controls.cpp
+                src/common/generateRandomColor.cpp
+                src/common/loadObj.cpp
+                src/common/loadShader.cpp
+                src/common/loadTexture.cpp)
 
-add_executable(openglTesting src/application.cpp)
 target_include_directories(openglTesting PUBLIC headers "${PROJECT_BINARY_DIR}")
-target_link_libraries(openglTesting glfw OpenGL::GL ${GLEW_LIBRARY} glm project_warnings standard_project_settings common_src)
+target_link_libraries(openglTesting PUBLIC glfw OpenGL::GL ${GLEW_LIBRARY} glm project_warnings standard_project_settings)
