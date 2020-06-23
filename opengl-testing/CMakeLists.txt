@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.5)
 
 project(openglTesting VERSION 0.1)
+include(cmake/PreventInSourceBuilds.cmake)
 
 find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
