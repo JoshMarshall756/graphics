@@ -1,3 +1,6 @@
+#ifndef PPM_HPP
+#define PPM_HPP
+
 //Process a binary PPM file
 #include <vector>
 #include <string>
@@ -5,8 +8,6 @@
 #include <fstream>
 #include <sstream>
 #include <exception>
-
-#pragma once
 
 class ppm {
     void init();
@@ -153,3 +154,4 @@ void ppm::write(const std::string &fname) {
     }
     inp.close();
 }
+#endif
