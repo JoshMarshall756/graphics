@@ -1,9 +1,13 @@
-cmake_minimum_required (VERSION 3.5)
+cmake_minimum_required (VERSION 3.11...3.18)
+project (perlin-noise VERSION 1.0.0 LANGUAGES C CXX)
 
-project (perlin-noise)
+include(cmake/PreventInSourceBuilds.cmake)
+add_library(StandardProjectSettings INTERFACE)
+assureOutOfSourceBuilds()
 
-set (source_dir "${PROJECT_SOURCE_DIR}/src/")
+include(cmake/CompilerWarnings.cmake)
+add_library(ProjectWarnings INTERFACE)
+setCompilerWarnings(ProjectWarnings)
 
-file (GLOB source_files "${source_dir}/*.cpp")
-
-add_executable (perlin-noise "${source_files}")
+add_executable(perlin_noise src/application.cpp)
+target_link_libraries(perlin_noise ProjectWarnings StandardProjectSettings)
