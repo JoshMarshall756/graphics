@@ -11,7 +11,7 @@ class PerlinNoise
 
 public:
     PerlinNoise();
-    PerlinNoise(int seed);
+    PerlinNoise(long unsigned int seed);
     double noise(double x, double y, double z);
 
 private:
@@ -41,7 +41,7 @@ PerlinNoise::PerlinNoise()
     p.insert(p.end(), p.begin(), p.end());
 }
 
-PerlinNoise::PerlinNoise(int seed)
+PerlinNoise::PerlinNoise(long unsigned int seed)
 {
     p.resize(256);
     // Fill p with values from 0 to 255
@@ -57,9 +57,9 @@ PerlinNoise::PerlinNoise(int seed)
 double PerlinNoise::noise(double x, double y, double z)
 {
     // Find the unit cube that contains the point
-    int X = (int)floor(x) & 255;
-    int Y = (int)floor(y) & 255;
-    int Z = (int)floor(z) & 255;
+    int X = static_cast<int>(floor(x)) & 255;
+    int Y = static_cast<int>(floor(y)) & 255;
+    int Z = static_cast<int>(floor(z)) & 255;
 
     // Find relative x, y, z of point in cube
     x -= floor(x);
